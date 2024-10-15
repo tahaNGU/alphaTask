@@ -18,8 +18,8 @@ class KycController extends Controller
         return $this->kycService->storeKyc($request->validated());
     }
 
-    public function show(kyc $kyc){
-        return $this->kycService->showKyc($kyc);
+    public function show(string $national_code){
+        return $this->kycService->showKyc($national_code);
     }
 
     public function downloadPic(kyc $kyc){

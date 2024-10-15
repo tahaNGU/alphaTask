@@ -17,9 +17,16 @@ class KycRepository implements kycRepositoryInterface
         $this->model = $kyc;
     }
 
-    public function getByNationalCode(kyc $kyc)
+    public function getByNationalCode(string $national_code)
     {
-        return Cache::get($kyc['id']);
+        if(Cache::has($national_code)){
+            return Cache::get($national_code);
+        }else{
+            $kyc=kyc::where('national_code',$national_code)->firstOrFail();
+            Cache::set($national_code,$kyc->toArray());
+            return Cache::get($national_code);
+
+        }
     }
 
     public function store(array $data)
@@ -27,7 +34,7 @@ class KycRepository implements kycRepositoryInterface
         $kyc=$this->model->create($data);
         $kyc->addMedia($data['pic'])->toMediaCollection('image');
         $kyc['pic']=route('kyc.pic',['kyc'=>$kyc['id']]);
-        Cache::forever(key:$kyc['id'], value: $kyc->toArray());
+        Cache::forever(key:$kyc['national_code'], value: $kyc->toArray());
         return $kyc;
     }
     public function downloadPic(kyc $kyc){

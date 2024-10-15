@@ -7,7 +7,7 @@ interface KycServiceInterface
 {
     public function storeKyc(array $data);
    
-    public function showKyc(kyc $kyc);
+    public function showKyc(string $national_code);
 
     public function downloadPic(kyc $kyc);
 }

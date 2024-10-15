@@ -6,7 +6,7 @@ use App\Models\kyc;
 
 interface kycRepositoryInterface
 {
-    public function getByNationalCode(kyc $kyc);
+    public function getByNationalCode(string $national_code);
 
     public function store(array $data);
 

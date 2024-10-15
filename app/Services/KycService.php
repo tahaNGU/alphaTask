@@ -29,10 +29,10 @@ class KycService implements KycServiceInterface
         return $this->kycRepository->downloadPic($kyc);
     }
 
-    public function showKyc(kyc $kyc){
+    public function showKyc(string $national_code){
         return response()->json([
             'msg'=>'kyc sample model',
-            'data'=>$this->kycRepository->getByNationalCode($kyc)
+            'data'=>$this->kycRepository->getByNationalCode($national_code)
         ],Response::HTTP_ACCEPTED);
     }
 
