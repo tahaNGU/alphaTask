@@ -16,7 +16,7 @@ class kyc extends Model implements HasMedia
     protected $table="kyc";
     protected $append=['image'];
     protected $hidden=['media'];
-    public $fillable=['natioal_code','birthday'];
+    public $fillable=['national_code','birthday'];
 
     protected $casts = [
         'birthday' => date_birth::class,
@@ -28,6 +28,6 @@ class kyc extends Model implements HasMedia
 
     public function getRouteKeyName(): string
     {
-        return 'natioal_code';
+        return 'national_code';
     }
 }

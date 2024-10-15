@@ -18,7 +18,7 @@ class kycFactory extends Factory
     public function definition(): array
     {
         return [
-            'natioal_code'=>rand(1000000000,9000000000),
+            'national_code'=>rand(1000000000,9000000000),
             'birthday'=>'1389/01/02'
         ];
     }

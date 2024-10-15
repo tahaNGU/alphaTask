@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kyc', function (Blueprint $table) {
             $table->id();
-            $table->string("natioal_code",10)->unique();
+            $table->string("national_code",10)->unique();
             $table->timestamp('birthday');
             $table->softDeletes();
             $table->timestamps();

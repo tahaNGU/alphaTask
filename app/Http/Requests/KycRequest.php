@@ -24,7 +24,7 @@ class KycRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'natioal_code'=>['required','size:10','unique:kyc,natioal_code'],
+            'national_code'=>['required','size:10','unique:kyc,national_code'],
             'pic'=>['required','image','mimes:jpg,jpeg,png','max:512'],
             'birthday'=>['required','regex:/^(13[0-9]{2})\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/']
         ];

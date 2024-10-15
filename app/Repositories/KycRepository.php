@@ -30,10 +30,8 @@ class KycRepository implements kycRepositoryInterface
         Cache::forever(key:$kyc['id'], value: $kyc->toArray());
         return $kyc;
     }
-
     public function downloadPic(kyc $kyc){
         return $kyc;
-    
     }
 
 }
