@@ -25,6 +25,10 @@ class KycService implements KycServiceInterface
 
     }
 
+    public function downloadPic(kyc $kyc){
+        return $this->kycRepository->downloadPic($kyc);
+    }
+
     public function showKyc(kyc $kyc){
         return response()->json([
             'msg'=>'kyc sample model',

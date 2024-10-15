@@ -167,8 +167,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\KycRepositoryServiceProvider::class,
-        App\Providers\KycServiceProvider::class
+        App\Providers\kycServiceProvider::class
     ])->toArray(),
 
     /*

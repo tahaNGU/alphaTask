@@ -21,4 +21,10 @@ class KycController extends Controller
     public function show(kyc $kyc){
         return $this->kycService->showKyc($kyc);
     }
+
+    public function downloadPic(kyc $kyc){
+        $kyc= $this->kycService->downloadPic($kyc);
+        $kyc = $kyc->getFirstMedia('image');
+        return response()->download($kyc->getPath(), $kyc->file_name); 
+    }
 }
