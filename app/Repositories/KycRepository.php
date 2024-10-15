@@ -25,7 +25,6 @@ class KycRepository implements kycRepositoryInterface
             $kyc=kyc::where('national_code',$national_code)->firstOrFail();
             Cache::set($national_code,$kyc->toArray());
             return Cache::get($national_code);
-
         }
     }
 
