@@ -22,21 +22,23 @@ class KycTest extends TestCase
         $response->assertStatus(Response::HTTP_CREATED);
     }
 
-    public function test_validation_natinal_code(){
+    public function test_validation_national_code_unique(){
         $kyc=self::__kyc();
-        $response = $this->post(route($this->prefixRoute.".store"),[
-            'national_code'=>$kyc['national_code'],
-            'pic'=>uploadedFile::fake()->image('photo.jpg'),
-            'birthday'=>'1389/01/02'
-        ]);
+        $parameter=self::parameter_for_test();
+        $parameter['national_code']=$kyc['national_code'];
+        $response = $this->post(route($this->prefixRoute.".store"),$parameter);
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)->assertUnprocessable();
     }
-    public function test_validation_biethday(){
-        $response = $this->post(route($this->prefixRoute.".store"),[
-            'national_code'=>rand(1000000000,9000000000),
-            'pic'=>uploadedFile::fake()->image('photo.jpg'),
-            'birthday'=>'1389-01-02'
-        ]);
+    public function test_validation_birthday(){
+        $parameter=self::parameter_for_test();
+        $parameter['birthday']='1389-01-02';
+        $response = $this->post(route($this->prefixRoute.".store"),$parameter);
+        $response->assertStatus(status: Response::HTTP_UNPROCESSABLE_ENTITY)->assertUnprocessable();
+    }
+    public function test_pic_and_format(){
+        $parameter=self::parameter_for_test();
+        $parameter['pic']=uploadedFile::fake()->image('photo.pdf');
+        $response = $this->post(route($this->prefixRoute.".store"),$parameter);
         $response->assertStatus(status: Response::HTTP_UNPROCESSABLE_ENTITY)->assertUnprocessable();
     }
     public function test_get_kyc(){
@@ -53,5 +55,14 @@ class KycTest extends TestCase
     private function __kyc(): object
     {
         return kyc::factory()->create();
+    }
+
+    private function parameter_for_test()
+    {
+        return [
+            'national_code'=>rand(1000000000,9000000000),
+            'pic'=>uploadedFile::fake()->image('photo.jpg'),
+            'birthday'=>'1389/01/02'
+        ];
     }
 }
